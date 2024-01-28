@@ -11,6 +11,35 @@ Class {
 	#category : #MZI
 }
 
+{ #category : #script }
+Photon class >> runExperiment1 [
+
+	| p |
+	p := self new.
+	p
+		beamSplitter;
+		blockLowerPath;
+		mirror;
+		beamSplitter;
+		detector.
+	Transcript clear.
+	Transcript show: p log.
+]
+
+{ #category : #script }
+Photon class >> runExperiment2 [
+
+	| p |
+	p := self new.
+	p
+		beamSplitter;
+		mirror;
+		beamSplitter;
+		detector.
+	Transcript clear.
+	Transcript show: p log.
+]
+
 { #category : #initialization }
 Photon >> asProbabilities [
 	|upper lower|
