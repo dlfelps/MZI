@@ -40,6 +40,36 @@ Photon class >> runExperiment2 [
 	Transcript show: p log.
 ]
 
+{ #category : #script }
+Photon class >> runExperiment3a [
+
+	| p |
+	p := self new.
+	p
+		beamSplitter;
+		defectiveEVBomb;
+		mirror;
+		beamSplitter;
+		detector.
+	Transcript clear.
+	Transcript show: p log.
+]
+
+{ #category : #script }
+Photon class >> runExperiment3b [
+
+	| p |
+	p := self new.
+	p
+		beamSplitter;
+		workingEVBomb;
+		mirror;
+		beamSplitter;
+		detector.
+	Transcript clear.
+	Transcript show: p log.
+]
+
 { #category : #initialization }
 Photon >> asProbabilities [
 	|upper lower|
@@ -63,6 +93,12 @@ Photon >> beamSplitter [
 Photon >> blockLowerPath [
 	state at: 2 at: 1 put: (Complex real:0 imaginary: 0). "block the lower path"
 	log := log, 'Photon''s path blocked on lower path. >> ', self asProbabilities printString, String cr.
+
+]
+
+{ #category : #initialization }
+Photon >> defectiveEVBomb [
+	log := log, 'Photon passes through defective E-V Bomb placed on the lower path. >> ', self asProbabilities printString, String cr.
 
 ]
 
@@ -112,5 +148,12 @@ Photon >> mirror [
 { #category : #initialization }
 Photon >> state [
 	^state
+
+]
+
+{ #category : #initialization }
+Photon >> workingEVBomb [
+	state at: 2 at: 1 put: (Complex real:0 imaginary: 0). "block the lower path"
+	log := log, 'Photon detonates E-V Bomb on the lower path with 50% probability. >> ', self asProbabilities printString, String cr.
 
 ]
