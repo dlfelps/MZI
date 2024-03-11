@@ -27,7 +27,7 @@ Photon class >> runExperiment1 [
 ]
 
 { #category : #script }
-Photon class >> runExperiment2 [
+Photon class >> runExperiment2a [
 
 	| p |
 	p := self new.
@@ -35,6 +35,48 @@ Photon class >> runExperiment2 [
 		beamSplitter;
 		mirror;
 		beamSplitter;
+		detector.
+	Transcript clear.
+	Transcript show: p log.
+]
+
+{ #category : #script }
+Photon class >> runExperiment2b [
+
+	| p |
+	p := self new.
+	p
+		beamSplitter;
+		mirror;
+		detector.
+	Transcript clear.
+	Transcript show: p log.
+]
+
+{ #category : #script }
+Photon class >> runExperiment2c [
+
+	| p |
+	p := self new.
+	p
+		beamSplitter;
+		insertSecondBeamsplitter;
+		mirror;
+		beamSplitter;
+		detector.
+	Transcript clear.
+	Transcript show: p log.
+]
+
+{ #category : #script }
+Photon class >> runExperiment2d [
+
+	| p |
+	p := self new.
+	p
+		beamSplitter;
+		skipSecondBeamsplitter;
+		mirror;
 		detector.
 	Transcript clear.
 	Transcript show: p log.
@@ -131,6 +173,12 @@ Photon >> initialize [
 ]
 
 { #category : #initialization }
+Photon >> insertSecondBeamsplitter [
+	log := log, 'Second beamsplitter inserted into setup after mirror. ', String cr.
+
+]
+
+{ #category : #initialization }
 Photon >> log [
 	^log
 ]
@@ -138,10 +186,16 @@ Photon >> log [
 { #category : #initialization }
 Photon >> mirror [
 	|contents transform|
-	contents := Array with: (Complex real:0 imaginary: 0) with: (Complex real:1 imaginary: 0) with: (Complex real:1 imaginary: 0) with: (Complex real:0 imaginary: 0).
+	contents := Array with: (Complex real:0 imaginary: 0) with: (Complex real:-1 imaginary: 0) with: (Complex real:-1 imaginary: 0) with: (Complex real:0 imaginary: 0).
 	transform := Array2D rows: 2 columns: 2 contents: contents.
 	state := transform +* state.
 	log := log, 'Photon bouncing off of a mirror. >> ', self asProbabilities printString, String cr.
+
+]
+
+{ #category : #initialization }
+Photon >> skipSecondBeamsplitter [
+	log := log, 'Second beamsplitter omitted from setup. ', String cr.
 
 ]
 

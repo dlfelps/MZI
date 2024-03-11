@@ -18,7 +18,7 @@ PhotonTest >> setUp [
 { #category : #tests }
 PhotonTest >> testMirror [
 	|contents|
-	contents := Array with: (Complex real: 1 imaginary: 0) with: (Complex real: 0 imaginary: 0).
+	contents := Array with: (Complex real: -1 imaginary: 0) with: (Complex real: 0 imaginary: 0).
 	self assert: (p mirror) state privateContents equals: contents.
 ]
 
